@@ -1,0 +1,25 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Virtual Vehicle Suspension &amp; PID Laboratory</title><link rel="stylesheet" href="style.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script></head><body>
+<header><h1>Virtual Suspension &amp; PID Laboratory</h1><span id="status"></span></header>
+<main>
+<aside id="left"><div class="row"><label>Vehicle preset (illustrative values, not manufacturer data)</label><select id="preset"><option value="custom">Custom vehicle</option><option value="small">Small passenger car</option><option value="sedan">Sedan</option><option value="suv">SUV</option><option value="heavy">Heavy vehicle</option><option value="sports">Sports car</option></select></div>
+<div class="row"><label>Suspension type (equivalent motion ratio only; geometry not simulated)</label><select id="susp"><option value="basic">Basic mass-spring-damper</option><option value="macpherson">MacPherson strut</option><option value="wishbone">Double wishbone</option><option value="multilink">Multi-link</option><option value="trailing">Trailing arm</option></select></div>
+<div class="row"><label>Road</label><select id="road"><option value="smooth">Smooth</option><option value="bump" selected>Single speed breaker</option><option value="multi">Multiple speed breakers</option><option value="pothole">Pothole</option><option value="sine">Sinusoidal</option><option value="random">Random rough</option><option value="custom">Custom profile</option></select></div>
+<div class="row"><label>Custom road: "x (m), height (mm)" per line</label><textarea id="custom" rows="4">0,0
+3,0
+3.5,50
+4.5,50
+5,0</textarea></div>
+<div class="row"><label>Controller mode</label><select id="mode"><option value="on" selected>PID ON</option><option value="off">PID OFF</option><option value="manual">Manual actuator</option></select></div>
+<button id="tune">Auto-tune PID</button> <button id="rst">Restore defaults</button></aside>
+<section id="center"><canvas id="cv" width="900" height="360"></canvas>
+<div class="bar"><button id="play">Play / Resume</button><button id="pause">Pause</button><button id="step">Step 10 ms</button><button id="reset">Reset</button>
+<button data-speed="0.1">0.1x</button><button data-speed="0.25">0.25x</button><button data-speed="0.5">0.5x</button><button data-speed="1">1x</button><button data-speed="2">2x</button><button data-speed="5">5x</button>
+<button id="zin">Zoom +</button><button id="zout">Zoom -</button><button id="left_">◀</button><button id="right_">▶</button></div>
+<div class="bar"><button id="csv">CSV</button><button id="png">Graph PNGs</button><button id="sum">Summary</button><button id="par">Parameters</button><button id="clr">Clear graphs</button><button id="cmp">Run comparison</button></div>
+<div id="cmpOut"></div></section>
+<aside id="right"><h3>Live simulated measurements</h3><div id="dash"></div></aside>
+</main>
+<section id="graphs"><div><canvas id="g1"></canvas></div><div><canvas id="g2"></canvas></div><div><canvas id="g3"></canvas></div><div><canvas id="g4"></canvas></div><div><canvas id="g5"></canvas></div><div><canvas id="g6"></canvas></div></section>
+<script src="physics.js"></script><script src="pid-controller.js"></script><script src="simulation.js"></script><script src="vehicle-animation.js"></script><script src="graphs.js"></script><script src="comparison.js"></script><script src="export.js"></script><script src="controls.js"></script></body></html>
